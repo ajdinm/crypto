@@ -4,7 +4,8 @@ from test import test
 def permutation(perm_array, msg):
     if len(perm_array) != len(msg):
         raise ValueError('lengths missmatch')
-
+    
+    # cipher location i == msg location key.index(i)
     cipher = map(lambda i: msg[perm_array.index(i)], range(len(msg)))
     return ''.join(cipher)
 
