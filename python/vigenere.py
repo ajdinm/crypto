@@ -61,6 +61,7 @@ def test_decrypt():
 
 key = 'SESAME'
 msg = 'THISISATESTMESSAG'
+
 print 'TESTING ADD_LETTERS'
 test_add_letters()
 print 'TESTING ENCRYPT'
