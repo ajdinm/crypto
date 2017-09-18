@@ -1,3 +1,4 @@
+from test import test
 def add_letters(p, q):
     p = p.upper()
     q = q.upper()
@@ -15,21 +16,22 @@ def substract_letters(p, q):
     new_letter = start + new_letter
     return chr(new_letter)
 
-def test(test_cases, f):
+def _test(test_cases, f):
     for test_case in test_cases:
         print 'OK' if test_case[-1] == f(test_case[0], test_case[1]) else 'NOK'
 
 def test_add_letters():
     test_cases = [('T', 'S', 'L'),
                   ('T', 'E', 'X'),
+                  ('T', 'E', 'H'), # expected to fail
                   ('S', 'A', 'S')]
-    test(test_cases, add_letters)
+    test(test_cases, add_letters, 'add_letters')
 
 def test_substract_letters():
     test_cases = [('L', 'S', 'T'),
                   ('X', 'E', 'T'),
                   ('S', 'A', 'S')]
-    test(test_cases, substract_letters)
+    test(test_cases, substract_letters, 'substract_letters')
 
 def add_padding(msg, key):
     remainder = len(msg) % len(key)
@@ -51,23 +53,19 @@ def decrypt(cipher_text, key):
 
 def test_encrypt():
     test_cases = [['THISISATESTMESSAGE', 'SESAME', 'LLASUWSXWSFQWWKASI']]
-    test(test_cases, encrypt)
+    test(test_cases, encrypt, 'encrypt')
 
 def test_decrypt():
     test_cases = [['LLASUWSXWSFQWWKASI','SESAME', 'THISISATESTMESSAGE']]
-    test(test_cases, decrypt)
+    test(test_cases, decrypt, 'decrypt')
 
 
 
 key = 'SESAME'
 msg = 'THISISATESTMESSAG'
 
-print 'TESTING ADD_LETTERS'
 test_add_letters()
-print 'TESTING ENCRYPT'
 test_encrypt()
-print 'TESTING SUBSTRACT_LETTERS'
 test_substract_letters()
-print 'TESTING DECRYPT'
 test_decrypt()
 
