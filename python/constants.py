@@ -78,4 +78,24 @@ def get_s_box_keys():
 
     return [s_box_1, s_box_2, s_box_3, s_box_4, s_box_5, s_box_6, s_box_7, s_box_8]
 
+def get_key_schedule_permutation_array():
+    to_return = [57, 49, 41, 33, 25, 17, 9, 1, 58, 50, 42, 34, 26, 18,
+                 10, 2, 59, 51, 43, 35, 27, 19, 11, 3, 60, 52, 44, 36,
+                 63, 55, 47, 39, 31, 23, 15, 7, 62, 54, 46, 38, 30, 22,
+                 14, 6, 61, 53, 45, 37, 29, 21, 13, 5, 28, 20, 12, 4]
+    to_return = map(lambda x: x-1, to_return)
+    return to_return
 
+def get_pc_1_permutation():
+    to_return = [16, 7, 20, 21, 29, 12, 28, 17, 1, 15, 23, 26, 5, 18, 31, 10,
+                 2, 8, 24, 14, 32, 27, 3, 9, 19, 13, 30, 6, 22, 11, 4, 25]
+    to_return = map(lambda x: x-1, to_return)
+    return to_return
+
+def get_pc_2_permutation():
+    to_return = [14, 17, 11, 24, 1, 5, 3, 28, 15, 6, 21, 10,
+                 23, 19, 12, 4, 26, 8, 16, 7, 27, 20, 13, 2,
+                 41, 52, 31, 37, 47, 55, 30, 40, 51, 45, 33, 48,
+                 44, 49, 39, 56, 34, 53, 46, 42, 50, 30, 29, 32] 
+    to_return = map(lambda x: x-1, to_return)
+    return to_return
