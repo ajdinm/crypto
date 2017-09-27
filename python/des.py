@@ -32,7 +32,7 @@ def fill_bits(target, msg):
 def get_round_keys(key, r = 16):
     r = r+1
     C, D = range(r), range(r)
-    C[0] = permutation(get_pc_1_permutation(), key)
+    C[0] = permutation(get_pc_1_permutation_array(), key)
     C[0], D[0] = C[0][:28], C[0][28:]
     round_keys = [None] * r
     for i in range(1, r):
@@ -54,28 +54,39 @@ def s_box(key, msg):
 def left_cyclic_shift(x, n):
     return map(lambda i: x[(i+n)%len(x)], x)
 
+def split_array(array, items_in_split):
+    to_return = [array[i*items_in_split:i*items_in_split + items_in_split] 
+                        for i in range(len(array)/items_in_split)]
+    return to_return
+
 def des_seq(msg, key): 
     if len(msg) != 64:
         raise ValueError('only working with 64bit plaintext')
     msg = permutation(initial_permutation_array, msg)
     expansion_array = map(lambda x: x-1, get_expansion_permutation_array())
-    l, r = msg[:32], msg[32:]
     rounds = 16
     L, R = range(rounds), range(rounds)
-    L[0], R[0] = l, r
+    L[0], R[0] = msg[:32], msg[32:]
     round_keys = get_round_keys(key, rounds)
     s_boxes = get_s_box_keys()
     s_boxes = map(lambda box: partial(s_box, box), s_boxes)
-    for i in range(1, rounds):
-        R[i] = expand_right(R[i])
-        R[i] = permutation(expansion_array, R[i])
+    for i in range(1, rounds+1):
+        L[i] = R[i-1]
+        # R[i] = F(R[i-1], K[i]) XOR L[i-1]
+        R[i] = expand_right(R[i-1])
+        R[i] = permutation(expansion_array, R[i]) 
         R[i] = np.bitwise_xor(int(R[i], 2), int(round_keys[i-1], 2))
         number_of_bits_in_lot = 6
-        split = [R[i][j*number_of_bits_in_lot:j*number_of_bits_in_lot+number_of_bits_in_lot]
-                    for j in ranke(len(R[i])/float(number_of_bits_in_lot))]
+        split = split_array(R[i], number_of_bits_in_lot)
+#        split = [R[i][j*number_of_bits_in_lot:j*number_of_bits_in_lot+number_of_bits_in_lot]
+#                    for j in ranke(len(R[i])/float(number_of_bits_in_lot))]
 
         split = map(lambda msg_part, box: box(msg_part), split, s_boxes)
         split = ''.join(split)
+        R[i] = permutation(get_P_permutation(), R[i])
+    cipher_text = L[-1] + R[-1]
+    cipher_text = permutation(get_inverse_permutation_array(), cipher_text)
+    return cipher_text
 
 test_permutation()
-des_seq('1' * 64, 1)
+des_seq('1' * 64, '1' * 64)
