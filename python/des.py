@@ -7,19 +7,15 @@ initial_permutation_array = map(lambda x: x-1, get_initital_permutation_array())
 
 
 def permutation(key, msg):
-    if len(key) != len(msg):
-        print len(key)
-        print len(msg)
-        raise ValueError()
+#    if len(key) != len(msg):
+#        print len(key)
+#        print len(msg)
+#        raise ValueError()
 
-    result = ''.join(map(lambda i: msg[key[i]], range(len(msg))))
+    result = ''.join(map(lambda i: msg[key[i]], range(len(key))))
     return result
 
-def test_permutation():
-    test_cases = [ ([1, 0], 'ab', 'ba')]
-    test(test_cases, permutation, 'permutation')
-
-def expand_right(r):
+def expand(r):
     to_add = 48 - len(r)
     return '0' * to_add + r
 
@@ -44,15 +40,15 @@ def get_round_keys(key, r = 16):
         round_keys[i] = C[i] + D[i]
         round_keys[i] = permutation(get_pc_2_permutation(), round_keys[i])
 
-    return rounds[1:]
+    return round_keys[1:]
 
 def s_box(key, msg):
-    row = int(msg[0], msg[5], 2)
+    row = int(msg[0] + msg[5], 2)
     col = int(msg[1:5], 2)
-    return fill_bits(4, key[row][col])
+    return fill_bits(4, bin(key[row][col])[2:])
 
 def left_cyclic_shift(x, n):
-    return map(lambda i: x[(i+n)%len(x)], x)
+    return ''.join(map(lambda i: x[(i+n)%len(x)], range(len(x))))
 
 def split_array(array, items_in_split):
     to_return = [array[i*items_in_split:i*items_in_split + items_in_split] 
@@ -65,7 +61,7 @@ def des_seq(msg, key):
     msg = permutation(initial_permutation_array, msg)
     expansion_array = map(lambda x: x-1, get_expansion_permutation_array())
     rounds = 16
-    L, R = range(rounds), range(rounds)
+    L, R = range(rounds+1), range(rounds+1)
     L[0], R[0] = msg[:32], msg[32:]
     round_keys = get_round_keys(key, rounds)
     s_boxes = get_s_box_keys()
@@ -73,14 +69,13 @@ def des_seq(msg, key):
     for i in range(1, rounds+1):
         L[i] = R[i-1]
         # R[i] = F(R[i-1], K[i]) XOR L[i-1]
-        R[i] = expand_right(R[i-1])
+        R[i] = expand(R[i-1])
         R[i] = permutation(expansion_array, R[i]) 
-        R[i] = np.bitwise_xor(int(R[i], 2), int(round_keys[i-1], 2))
+        R[i] = fill_bits(48, bin(np.bitwise_xor(int(R[i], 2), int(round_keys[i-1], 2)))[2:])
         number_of_bits_in_lot = 6
         split = split_array(R[i], number_of_bits_in_lot)
 #        split = [R[i][j*number_of_bits_in_lot:j*number_of_bits_in_lot+number_of_bits_in_lot]
 #                    for j in ranke(len(R[i])/float(number_of_bits_in_lot))]
-
         split = map(lambda msg_part, box: box(msg_part), split, s_boxes)
         split = ''.join(split)
         R[i] = permutation(get_P_permutation(), R[i])
@@ -88,5 +83,6 @@ def des_seq(msg, key):
     cipher_text = permutation(get_inverse_permutation_array(), cipher_text)
     return cipher_text
 
-test_permutation()
-des_seq('1' * 64, '1' * 64)
+key = '1011011011000100000110000111011100111001101111101101100000011111'
+msg = '0100111101000100111110011000010000111111100011010010100011011011'
+print des_seq(msg, key)
