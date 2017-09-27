@@ -5,7 +5,6 @@ from functools import partial
 
 initial_permutation_array = map(lambda x: x-1, get_initital_permutation_array())
 
-
 def permutation(key, msg):
 #    if len(key) != len(msg):
 #        print len(key)
@@ -83,6 +82,9 @@ def des_seq(msg, key):
     cipher_text = permutation(get_inverse_permutation_array(), cipher_text)
     return cipher_text
 
-key = '1011011011000100000110000111011100111001101111101101100000011111'
-msg = '0100111101000100111110011000010000111111100011010010100011011011'
-print des_seq(msg, key)
+#key = '0111001101100101011000110111001001100101011101000101111101101011' # 'secret_k'
+#msg = '0110100001100101011011000110110001101111001000000111011101101111' # 'Hello wo'
+#print 'key: ' + key
+#print 'msg: ' + msg
+#print 'result: ' + des_seq(msg, key)
+#print 'expected: ' + '1010100101011010101001100001000110111000011110001101101111101101'
