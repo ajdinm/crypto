@@ -173,8 +173,6 @@ class des():
             tmp = None
             for i in range(16): #Do the 16 rounds
                 d_e = self.expand(d, E) #Expand d to match Ki size (48bits)
-                if i == 0 and action == ENCRYPT:
-                    print_array(d_e, 'tmp: ')
                 if action == ENCRYPT:
                     tmp = self.xor(self.keys[i], d_e)#If encrypt use Ki
                 else:

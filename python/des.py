@@ -69,9 +69,8 @@ def des_seq(msg, key):
         # R[i] = F(R[i-1], K[i]) XOR L[i-1]
         #R[i] = expand(R[i-1])
         R[i] = permutation(get_expansion_permutation_array(), R[i-1]) 
-        if  i == 1:
-            print_array(R[i], 'tmp: ')
-        R[i] = fill_bits(48, bin(np.bitwise_xor(int(R[i], 2), int(round_keys[i-1], 2)))[2:])
+        R[i] = bin(np.bitwise_xor(int(R[i], 2), int(round_keys[i-1], 2)))[2:]
+        # tested up to here
         number_of_bits_in_lot = 6
         split = split_array(R[i], number_of_bits_in_lot)
 #        split = [R[i][j*number_of_bits_in_lot:j*number_of_bits_in_lot+number_of_bits_in_lot]
