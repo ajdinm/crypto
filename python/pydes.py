@@ -131,6 +131,9 @@ def binvalue(val, bitsize): #Return the binary value as a string of the given si
 def nsplit(s, n):#Split a list into sublists of size "n"
     return [s[k:k+n] for k in xrange(0, len(s), n)]
 
+def print_array(array, text = ''):
+    print text + ''.join(map(lambda x:str(x), array))
+
 ENCRYPT=1
 DECRYPT=0
 
@@ -166,11 +169,12 @@ class des():
         for block in text_blocks:#Loop over all the blocks of data
             block = string_to_bit_array(block)#Convert the block in bit array
             block = self.permut(block,PI)#Apply the initial permutation
-            print 'BLOCK: ' + str(block)
             g, d = nsplit(block, 32) #g(LEFT), d(RIGHT)
             tmp = None
             for i in range(16): #Do the 16 rounds
                 d_e = self.expand(d, E) #Expand d to match Ki size (48bits)
+                if i == 0 and action == ENCRYPT:
+                    print_array(d_e, 'tmp: ')
                 if action == ENCRYPT:
                     tmp = self.xor(self.keys[i], d_e)#If encrypt use Ki
                 else:

@@ -21,9 +21,13 @@ test_keys = get_round_keys(key)
 ba = bitarray()
 ba.fromstring(text)
 msg = ba.to01()
+my_des_cipher = des_seq(msg,key)
+
+correct_perm = d.permut(msg, get_initital_permutation_array())
+my_perm = permutation(get_initital_permutation_array(), msg)
 
 print 'key: ' + key
 print 'msg: ' + msg
-print 'result: \t' + des_seq(msg, key)
+print 'result: \t' + my_des_cipher
 print 'expected: \t' + '1010100101011010101001100001000110111000011110001101101111101101'
 

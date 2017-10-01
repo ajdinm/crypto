@@ -2,8 +2,7 @@ import numpy as np
 from constants import *
 from test import test
 from functools import partial
-
-initial_permutation_array = map(lambda x: x-1, get_initital_permutation_array())
+from pydes import *
 
 def permutation(key, msg):
 #    if len(key) != len(msg):
@@ -57,8 +56,8 @@ def split_array(array, items_in_split):
 def des_seq(msg, key): 
     if len(msg) != 64:
         raise ValueError('only working with 64bit plaintext')
-    msg = permutation(initial_permutation_array, msg)
-    expansion_array = map(lambda x: x-1, get_expansion_permutation_array())
+    msg = permutation(get_initital_permutation_array(), msg)
+    #print 'DES BLOCK:\t\t' + str(msg)
     rounds = 16
     L, R = range(rounds+1), range(rounds+1)
     L[0], R[0] = msg[:32], msg[32:]
@@ -68,8 +67,10 @@ def des_seq(msg, key):
     for i in range(1, rounds+1):
         L[i] = R[i-1]
         # R[i] = F(R[i-1], K[i]) XOR L[i-1]
-        R[i] = expand(R[i-1])
-        R[i] = permutation(expansion_array, R[i]) 
+        #R[i] = expand(R[i-1])
+        R[i] = permutation(get_expansion_permutation_array(), R[i-1]) 
+        if  i == 1:
+            print_array(R[i], 'tmp: ')
         R[i] = fill_bits(48, bin(np.bitwise_xor(int(R[i], 2), int(round_keys[i-1], 2)))[2:])
         number_of_bits_in_lot = 6
         split = split_array(R[i], number_of_bits_in_lot)
