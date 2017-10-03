@@ -9,7 +9,6 @@ def permutation(key, msg):
 #        print len(key)
 #        print len(msg)
 #        raise ValueError()
-    result = [None] * len(key)
     result = ''.join(map(lambda i: msg[key[i]], range(len(key))))
     return result
 
