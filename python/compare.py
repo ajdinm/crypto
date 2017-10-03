@@ -26,5 +26,4 @@ my_des_cipher = des_seq(msg,key)
 print 'key: ' + key
 print 'msg: ' + msg
 print 'result: \t' + my_des_cipher
-print 'expected: \t' + '1010100101011010101001100001000110111000011110001101101111101101'
-
+print 'expected: \t' + '1101111111100101111111011110010111011010100111110101110010011101'

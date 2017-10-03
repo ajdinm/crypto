@@ -109,6 +109,9 @@ PI_1 = [40, 8, 48, 16, 56, 24, 64, 32,
 #Matrix that determine the shift for each round of keys
 SHIFT = [1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1]
 
+def array_to_string(array): 
+    return ''.join(map(lambda x: str(x), array))
+
 def string_to_bit_array(text):#Convert a string into a list of bits
     array = list()
     for char in text:

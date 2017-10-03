@@ -9,7 +9,7 @@ def permutation(key, msg):
 #        print len(key)
 #        print len(msg)
 #        raise ValueError()
-
+    result = [None] * len(key)
     result = ''.join(map(lambda i: msg[key[i]], range(len(key))))
     return result
 
@@ -53,6 +53,10 @@ def split_array(array, items_in_split):
                         for i in range(len(array)/items_in_split)]
     return to_return
 
+def xor_bitstrings(a, b):
+    return fill_bits(len(a), bin(np.bitwise_xor(int(a, 2), int(b, 2)))[2:])
+
+
 def des_seq(msg, key): 
     if len(msg) != 64:
         raise ValueError('only working with 64bit plaintext')
@@ -67,18 +71,15 @@ def des_seq(msg, key):
     for i in range(1, rounds+1):
         L[i] = R[i-1]
         # R[i] = F(R[i-1], K[i]) XOR L[i-1]
-        #R[i] = expand(R[i-1])
         R[i] = permutation(get_expansion_permutation_array(), R[i-1]) 
-        R[i] = bin(np.bitwise_xor(int(R[i], 2), int(round_keys[i-1], 2)))[2:]
-        # tested up to here
+        R[i] = xor_bitstrings(R[i], round_keys[i-1])
         number_of_bits_in_lot = 6
         split = split_array(R[i], number_of_bits_in_lot)
-#        split = [R[i][j*number_of_bits_in_lot:j*number_of_bits_in_lot+number_of_bits_in_lot]
-#                    for j in ranke(len(R[i])/float(number_of_bits_in_lot))]
         split = map(lambda msg_part, box: box(msg_part), split, s_boxes)
         split = ''.join(split)
-        R[i] = permutation(get_P_permutation(), R[i])
-    cipher_text = L[-1] + R[-1]
+        R[i] = permutation(get_P_permutation(),split)
+        R[i] = xor_bitstrings(R[i], L[i-1])
+    cipher_text = R[-1] + L[-1]
     cipher_text = permutation(get_inverse_permutation_array(), cipher_text)
     return cipher_text
 
