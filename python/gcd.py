@@ -22,10 +22,7 @@ def gcd(a, b, q = [], r=[], s=[]):
     s = s + [s_temp]
     r = r  + [r_temp]
 
-#    print 'q', q
-#    print 'r', r
-#    print 's', s
-    #a = min_v
+    a = min_v
     b = r_temp
     return gcd(a, b, q, r, s)
 
