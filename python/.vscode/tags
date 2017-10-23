@@ -1,0 +1,126 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CP_1	../pydes.py	/^CP_1 = [57, 49, 41, 33, 25, 17, 9,$/;"	kind:variable	line:14
+CP_2	../pydes.py	/^CP_2 = [14, 17, 11, 24, 1, 5, 3, 28,$/;"	kind:variable	line:24
+DECRYPT	../pydes.py	/^DECRYPT=0$/;"	kind:variable	line:141
+E	../pydes.py	/^E = [32, 1, 2, 3, 4, 5,$/;"	kind:variable	line:32
+ENCRYPT	../pydes.py	/^ENCRYPT=1$/;"	kind:variable	line:140
+P	../pydes.py	/^P = [16, 7, 20, 21, 29, 12, 28, 17,$/;"	kind:variable	line:94
+PI	../pydes.py	/^PI = [58, 50, 42, 34, 26, 18, 10, 2,$/;"	kind:variable	line:4
+PI_1	../pydes.py	/^PI_1 = [40, 8, 48, 16, 56, 24, 64, 32,$/;"	kind:variable	line:100
+SHIFT	../pydes.py	/^SHIFT = [1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1]$/;"	kind:variable	line:110
+S_BOX	../pydes.py	/^S_BOX = [$/;"	kind:variable	line:42
+__init__	../pydes.py	/^    def __init__(self):$/;"	kind:member	line:144
+_test	../vigenere.py	/^def _test(test_cases, f):$/;"	kind:function	line:20
+addPadding	../pydes.py	/^    def addPadding(self):#Add padding to the datas using PKCS5 spec.$/;"	kind:member	line:229
+add_binary	../polynomial.py	/^def add_binary(a, b):$/;"	kind:function	line:3
+add_letters	../vigenere.py	/^def add_letters(p, q):$/;"	kind:function	line:3
+add_padding	../vigenere.py	/^def add_padding(msg, key):$/;"	kind:function	line:37
+add_polynomials_binary	../polynomial.py	/^def add_polynomials_binary(a, b):$/;"	kind:function	line:6
+array	../script.py	/^array = map(lambda x: int(x), text)$/;"	kind:variable	line:6
+array_to_string	../pydes.py	/^def array_to_string(array): $/;"	kind:function	line:112
+ba	../compare.py	/^ba = bitarray()$/;"	kind:variable	line:17
+ba	../compare.py	/^ba = bitarray()$/;"	kind:variable	line:21
+binvalue	../pydes.py	/^def binvalue(val, bitsize): #Return the binary value as a string of the given size $/;"	kind:function	line:126
+bit_array_to_string	../pydes.py	/^def bit_array_to_string(array): #Recreate the string from the bit array$/;"	kind:function	line:122
+caesar.py	../caesar.py	1;"	kind:file	line:1
+cipher	../compare.py	/^cipher = d.encrypt(key,text)$/;"	kind:variable	line:12
+compare.py	../compare.py	1;"	kind:file	line:1
+constants.py	../constants.py	1;"	kind:file	line:1
+correct_keys	../compare.py	/^correct_keys = d.get_round_keys()$/;"	kind:variable	line:15
+count_letter_occurance	../caesar.py	/^def count_letter_occurance(text, letter):$/;"	kind:function	line:12
+d	../compare.py	/^d = pydes.des()$/;"	kind:variable	line:11
+decrypt	../permutation.py	/^def decrypt(cipher, key):$/;"	kind:function	line:24
+decrypt	../pydes.py	/^    def decrypt(self, key, text, padding=False):$/;"	kind:member	line:240
+decrypt	../vigenere.py	/^def decrypt(cipher_text, key):$/;"	kind:function	line:49
+des	../pydes.py	/^class des():$/;"	kind:class	line:143
+des.py	../des.py	1;"	kind:file	line:1
+des_seq	../des.py	/^def des_seq(msg, key): $/;"	kind:function	line:59
+divide_polynomials	../polynomial.py	/^def divide_polynomials(a, b): # returns (c, d) touple where c = a\/b, and d is reminder in form (numerator, denominator)$/;"	kind:function	line:53
+encrypt	../permutation.py	/^def encrypt(msg, key):$/;"	kind:function	line:12
+encrypt	../pydes.py	/^    def encrypt(self, key, text, padding=False):$/;"	kind:member	line:237
+encrypt	../vigenere.py	/^def encrypt(msg, key):$/;"	kind:function	line:44
+english_letter_freq	../caesar.py	/^english_letter_freq = [8.2, 1.5, 2.8, 4.2, 12.7, 2.2,$/;"	kind:variable	line:42
+english_prob	../caesar.py	/^english_prob = map(lambda x: x\/100, english_letter_freq)$/;"	kind:variable	line:63
+expand	../des.py	/^def expand(r):$/;"	kind:function	line:15
+expand	../pydes.py	/^    def expand(self, block, table):#Do the exact same thing than permut but for more clarity has been renamed$/;"	kind:member	line:210
+file	../script.py	/^file = open('temp.txt', 'r')$/;"	kind:variable	line:1
+fill_bits	../des.py	/^def fill_bits(target, msg):$/;"	kind:function	line:19
+fill_bits	../polynomial.py	/^def fill_bits(x, n):$/;"	kind:function	line:17
+generatekeys	../pydes.py	/^    def generatekeys(self):#Algorithm that generates all the keys$/;"	kind:member	line:216
+get_P_permutation	../constants.py	/^def get_P_permutation():$/;"	kind:function	line:89
+get_expansion_permutation_array	../constants.py	/^def get_expansion_permutation_array():$/;"	kind:function	line:25
+get_initital_permutation_array	../constants.py	/^def get_initital_permutation_array():$/;"	kind:function	line:1
+get_inverse_permutation_array	../constants.py	/^def get_inverse_permutation_array():$/;"	kind:function	line:13
+get_letter	../caesar.py	/^def get_letter(number):$/;"	kind:function	line:9
+get_letter_probs	../caesar.py	/^def get_letter_probs(text):$/;"	kind:function	line:15
+get_pc_1_permutation_array	../constants.py	/^def get_pc_1_permutation_array():$/;"	kind:function	line:81
+get_pc_2_permutation	../constants.py	/^def get_pc_2_permutation():$/;"	kind:function	line:95
+get_polynomial_degree	../polynomial.py	/^def get_polynomial_degree(polynomial):$/;"	kind:function	line:24
+get_polynomial_from_degree	../polynomial.py	/^def get_polynomial_from_degree(degree):$/;"	kind:function	line:50
+get_random_bitstring	../test_des.py	/^def get_random_bitstring(n):$/;"	kind:function	line:7
+get_round_keys	../des.py	/^def get_round_keys(key, r = 16):$/;"	kind:function	line:25
+get_round_keys	../pydes.py	/^    def get_round_keys(self):$/;"	kind:member	line:149
+get_s_box_keys	../constants.py	/^def get_s_box_keys():$/;"	kind:function	line:37
+key	../compare.py	/^key = "secret_k"$/;"	kind:variable	line:9
+key	../compare.py	/^key = ba.to01()$/;"	kind:variable	line:19
+key	../vigenere.py	/^key = 'SESAME'$/;"	kind:variable	line:65
+left_cyclic_shift	../des.py	/^def left_cyclic_shift(x, n):$/;"	kind:function	line:47
+msg	../compare.py	/^msg = ba.to01()$/;"	kind:variable	line:23
+msg	../vigenere.py	/^msg = 'THISISATESTMESSAG'$/;"	kind:variable	line:66
+multiply_degree_polynomial	../polynomial.py	/^def multiply_degree_polynomial(degree, polynomial):$/;"	kind:function	line:30
+multiply_polynomials	../polynomial.py	/^def multiply_polynomials(a, b):$/;"	kind:function	line:39
+my_des_cipher	../compare.py	/^my_des_cipher = des_seq(msg,key)$/;"	kind:variable	line:24
+nsplit	../pydes.py	/^def nsplit(s, n):#Split a list into sublists of size "n"$/;"	kind:function	line:134
+permut	../pydes.py	/^    def permut(self, block, table):#Permut the given block using the given table (so generic method)$/;"	kind:member	line:207
+permutation	../des.py	/^def permutation(key, msg):$/;"	kind:function	line:7
+permutation	../permutation.py	/^def permutation(perm_array, msg):$/;"	kind:function	line:4
+permutation.py	../permutation.py	1;"	kind:file	line:1
+plain	../compare.py	/^plain = d.decrypt(key,cipher)$/;"	kind:variable	line:13
+polynomial.py	../polynomial.py	1;"	kind:file	line:1
+print_array	../compare.py	/^def print_array(array):$/;"	kind:function	line:5
+print_array	../pydes.py	/^def print_array(array, text = ''):$/;"	kind:function	line:137
+pydes.py	../pydes.py	1;"	kind:file	line:1
+removePadding	../pydes.py	/^    def removePadding(self, data):#Remove the padding of the plain text (it assume there is padding)$/;"	kind:member	line:233
+rotate	../caesar.py	/^rotate = shift_dist.index(min(shift_dist))$/;"	kind:variable	line:66
+run	../pydes.py	/^    def run(self, key, text, action=ENCRYPT, padding=False):$/;"	kind:member	line:155
+s_box	../des.py	/^def s_box(key, msg):$/;"	kind:function	line:42
+script.py	../script.py	1;"	kind:file	line:1
+shift	../pydes.py	/^    def shift(self, g, d, n): #Shift a list of the given value$/;"	kind:member	line:226
+shift_dist	../caesar.py	/^shift_dist = map(lambda i:total_variation_distance(english_prob, list(numpy.roll(text_prob, i))), range(26))$/;"	kind:variable	line:65
+shift_letter	../caesar.py	/^def shift_letter(letter, shift):$/;"	kind:function	line:25
+shift_text	../caesar.py	/^def shift_text(text, shift):$/;"	kind:function	line:38
+split_array	../des.py	/^def split_array(array, items_in_split):$/;"	kind:function	line:50
+string_to_bit_array	../pydes.py	/^def string_to_bit_array(text):#Convert a string into a list of bits$/;"	kind:function	line:115
+substitute	../pydes.py	/^    def substitute(self, d_e):#Substitute bytes using SBOX$/;"	kind:member	line:195
+substract_letters	../vigenere.py	/^def substract_letters(p, q):$/;"	kind:function	line:10
+test	../test.py	/^def test(test_cases, f, f_name, ok_msg = 'OK', nok_msg = 'NOK', print_ok_case = False, print_nok_case = True):$/;"	kind:function	line:3
+test.py	../test.py	1;"	kind:file	line:1
+test_add_letters	../vigenere.py	/^def test_add_letters():$/;"	kind:function	line:24
+test_decrypt	../permutation.py	/^def test_decrypt():$/;"	kind:function	line:34
+test_decrypt	../vigenere.py	/^def test_decrypt():$/;"	kind:function	line:59
+test_des.py	../test_des.py	1;"	kind:file	line:1
+test_encrypt	../permutation.py	/^def test_encrypt():$/;"	kind:function	line:28
+test_encrypt	../vigenere.py	/^def test_encrypt():$/;"	kind:function	line:55
+test_expand	../test_des.py	/^def test_expand():$/;"	kind:function	line:17
+test_get_round_keys	../test_des.py	/^def test_get_round_keys():$/;"	kind:function	line:31
+test_keys	../compare.py	/^test_keys = get_round_keys(key)$/;"	kind:variable	line:20
+test_left_cyclic_shift	../test_des.py	/^def test_left_cyclic_shift():$/;"	kind:function	line:23
+test_multiply_polynomials	../polynomial.py	/^def test_multiply_polynomials():$/;"	kind:function	line:66
+test_permutation	../permutation.py	/^def test_permutation():$/;"	kind:function	line:41
+test_permutation	../test_des.py	/^def test_permutation():$/;"	kind:function	line:10
+test_shift_letter	../caesar.py	/^def test_shift_letter():$/;"	kind:function	line:31
+test_substract_letters	../vigenere.py	/^def test_substract_letters():$/;"	kind:function	line:31
+test_text	../caesar.py	/^GUNG ZNXRF PNYNZVGL BS FB YBAT YVSR;'$/;"	kind:variable	line:61
+text	../compare.py	/^text= "Hello wo"$/;"	kind:variable	line:10
+text	../script.py	/^text = file.read()$/;"	kind:variable	line:2
+text	../script.py	/^text = text.replace(' ', '').split('\\n')[:-1]$/;"	kind:variable	line:5
+text_prob	../caesar.py	/^text_prob = get_letter_probs(test_text)$/;"	kind:variable	line:64
+total_variation_distance	../caesar.py	/^def total_variation_distance(X, Y):$/;"	kind:function	line:3
+vigenere.py	../vigenere.py	1;"	kind:file	line:1
+xor	../pydes.py	/^    def xor(self, t1, t2):#Apply a xor and return the resulting list$/;"	kind:member	line:213
+xor_bitstrings	../des.py	/^def xor_bitstrings(a, b):$/;"	kind:function	line:55

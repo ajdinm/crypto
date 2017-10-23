@@ -71,5 +71,5 @@ def test_multiply_polynomials():
                   ]
     test(test_cases, multiply_polynomials, 'multiply_polynomials')
 
-test_multiply_polynomials()
-print divide_polynomials([1, 0, 1, 0, 1], [1, 1])
+#test_multiply_polynomials()
+#print divide_polynomials([1, 0, 1, 0, 1], [1, 1])
