@@ -37,39 +37,80 @@ def add_dicts(a, b):
     a = pad_keys(a, b.keys())
     b = pad_keys(b, a.keys())
 
-    for key in a.keys():
+    for key in a.keys(): #TODO map
         b[key] = b[key] + a[key]
 
     return b
 
-def join_dicts(a, b): # a is such that there exists key K in b such K = eval(a)
+def _join_dicts(a, b, history, initial_keys): 
+    if(len(a) == 0):
+        return b
+    if(len(b) == 0):
+        return a
     key_to_be_replaced = filter(lambda x: x not in a.keys(), b.keys())[0] # assume only one
     factor = b[key_to_be_replaced]
     for key in a.keys():
         a[key] = factor * a[key] 
-    print a
     del b[key_to_be_replaced]
     return add_dicts(a, b)
 
-def gcd(a, b, r = []):
+def substitute_key(a, key, history):
+    print 'SUB KEY: ', a, key, history
+    if(len(a) == 0):
+        return a
+    factor = a[key]
+    desired_dict = history[key]
+    for temp in desired_dict.keys():
+        desired_dict[temp] = factor * desired_dict[temp]
+    del a[key]
+    #print 'dzeko', a, desired_dict
+    result = add_dicts(a, desired_dict)
+    #print 'dzekson', result
+    return result
+
+def join_dicts(a, b, history, initial_keys): 
+    a_sub_keys = list(set(a.keys()) - set(initial_keys))
+    b_sub_keys = list(set(b.keys()) - set(initial_keys))
+    print 'no', a, b
+
+    for key in a_sub_keys:
+        a = substitute_key(a, key, history)
+    for key in b_sub_keys:
+        b = substitute_key(b, key, history)
+
+    print 'idk', a, b
+
+    return add_dicts(a, b)
+
+def gcd(a, b, initial_keys = [], r = dict(), history = dict()):
+    if len(initial_keys) == 0:
+        initial_keys = [a, b]
     max_v = max(a, b)
     min_v = min(a, b)
     
     division_f = division()
     d = division_f(max_v, min_v)
-    s, r = d[0], d[1]
+    s, remainder = d[0], d[1]
+    if remainder == 0:
+        return [min_v, r]
 
     r_temp = dict()
     r_temp[max_v] = 1
     r_temp[min_v] = -1 * s
     
-    r = add_dicts(r_temp, r)
+    r = join_dicts(r, r_temp, history, initial_keys)
+    history[remainder] = r
+    print max_v, min_v, s, remainder, r
+    return gcd(min_v, remainder, initial_keys, r, history)
 
-#result = gcd(888, 54)
+result = gcd(888, 54)
+print 'result', result
+result = gcd(1312, 78)
+print 'result', result
 #print 'q', result[0]
 #print 'r', result[1]
 #print 's', result[2]
 
-a = {888:1, 54:-16}
-b = {54:1, 24:-2}
-print join_dicts(a, b)
+#a = {888:1, 54:-16}
+#b = {54:1, 24:-2}
+#print join_dicts(a, b)
