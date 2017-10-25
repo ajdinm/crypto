@@ -1,4 +1,5 @@
 from polynomial import *
+from copy import deepcopy
 
 def division():
     return lambda x, y: [x/y, x%y]
@@ -58,20 +59,22 @@ def substitute_key(a, key, history):
     if(len(a) == 0):
         return a
     factor = a[key]
-    print 'sub: ', a, key, history
-    desired_dict = history[key]
+    desired_dict = dict(history[key])
     for temp in desired_dict.keys():
         desired_dict[temp] = factor * desired_dict[temp]
     del a[key]
-    result = add_dicts(a, desired_dict)
+    result = add_dicts(dict(a), dict(desired_dict))
+    #print 'sub: ', a, key, history, result
     return result
 
 def update_dict(a,history, initial_keys): 
+    print '--- UPDATE DICT ---', a, history
     a_original = dict(a)
     a_sub_keys = list(set(a.keys()) - set(initial_keys))
+    print '\t a_sub_keys: ', a_sub_keys
     for key in a_sub_keys:
         a = substitute_key(a, key, history)
-    print 'update: ', a_original, history, initial_keys, a
+        print '\t\t iter_i: ', a
     return a
 
 def gcd(a, b, initial_keys = [], history = dict()):
@@ -83,16 +86,21 @@ def gcd(a, b, initial_keys = [], history = dict()):
     division_f = division()
     d = division_f(max_v, min_v)
     s, remainder = d[0], d[1]
+
+    if remainder == 0:
+        return [min_v, history[min_v]]
+
     r_temp = dict()
     r_temp[max_v] = 1
     r_temp[min_v] = -1 * s
-    r = update_dict(r_temp, history, initial_keys)
+    #print 'hist, sent', history, r_temp
+    r_temp = update_dict(dict(r_temp), history, initial_keys)
+    #print 'hist, received', history, r_temp
 
-    if remainder == 0:
-        return [min_v, r]
-    
-    history[remainder] = r
-    #print max_v, min_v, s, remainder, r
+    print 'hist before', history
+    history[remainder] = dict(r_temp)
+    print 'hist after', history
+    #print 'UPDATING: ', remainder, r_temp , ' HIST:', history
     return gcd(min_v, remainder, initial_keys, history)
 
 result = gcd(888, 54, history=dict())
