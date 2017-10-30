@@ -92,20 +92,20 @@ def ext_gcd_help(a, b, initial_keys = [], history = dict()):
     if len(initial_keys) == 0:
         initial_keys = [a, b]
 
+    # change these funs if want to use gcd for numbers
+    
     max_f = max_polynomial()
     min_f = min_polynomial()
+    division_f = division()
+    get_key_f = get_number_from_bitlist() # for (real) numbers, identity function
 
     max_v = max_f(a, b)
     min_v = min_f(a, b)
-    
-    # change these funs if wanna use gcd for numbers
-    division_f = division()
-    get_key_f = get_number_from_bitlist() # for (real) numbers, identity function
 
     d = division_f(max_v, min_v)
     s, remainder = d[0], d[1]
 
-    if remainder == 0:
+    if sum(remainder) == 0:
         if min_v in history.keys():
             return [min_v, history[get_key_f(min_v)]]
         #print 'a, b, rem', a, b, remainder
