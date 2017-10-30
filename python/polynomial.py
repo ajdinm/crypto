@@ -13,7 +13,43 @@ def add_polynomials_binary(a, b):
     b = fill_bits(b, max_len)
     return map(lambda x, y: add_binary(x, y), a, b)
 
+def max_polynomial(a, b):
+    if len(a) == 0 and len(b) == 0:
+        return a
+    if len(b) == 0:
+        return a
+    if len(a) == 0:
+        return b
 
+    a_deg = sorted(get_polynomial_degree(a), reverse=True)
+    b_deg = sorted(get_polynomial_degree(b), reverse=True) # desc
+
+    smaller_array = a_deg
+    greater_array = b_deg
+    original_small = a
+    original_great = b
+
+    if len(b_deg) < len(smaller_array):
+        smaller_array = b_deg
+        greater_array = a_deg
+        original_small = b
+        original_great = a
+
+    for i in range(len(smaller_array)):
+        if smaller_array[i] > greater_array[i]:
+            return original_small
+        if smaller_array[i] < greater_array[i]:
+            return original_great
+    return original_great
+
+def min_polynomial(a, b):
+
+    mmax = max_polynomial(a, b)
+    if mmax == a:
+        return b
+    return a
+
+    
 def fill_bits(x, n):
     to_add = n - len(x)
     if to_add <= 0:
@@ -71,5 +107,22 @@ def test_multiply_polynomials():
                   ]
     test(test_cases, multiply_polynomials, 'multiply_polynomials')
 
-#test_multiply_polynomials()
-#print divide_polynomials([1, 0, 1, 0, 1], [1, 1])
+def test_max_polynomial():
+    test_cases = [[[1, 1, 1], [1, 0, 1], [1, 1, 1]],
+                  [[1, 0, 1], [1, 1, 1], [1, 1, 1]],
+                  [[1, 0, 0], [1, 0, 0], [1, 0, 0]],
+                  [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+                  ]
+    test(test_cases, max_polynomial, 'max_polynomial')
+
+def test_min_polynomial():
+    test_cases = [[[1, 1, 1], [1, 0, 1], [1, 0, 1]],
+                  [[1, 0, 1], [1, 1, 1], [1, 0, 1]],
+                  [[1, 0, 0], [1, 0, 0], [1, 0, 0]],
+                  [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+                  ]
+    test(test_cases, min_polynomial, 'min_polynomial')
+
+test_multiply_polynomials()
+test_max_polynomial()
+test_min_polynomial()

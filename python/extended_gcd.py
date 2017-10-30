@@ -3,7 +3,12 @@ from copy import deepcopy
 from test import test
 
 def division():
+    return divide_polynomials()
     return lambda x, y: [x/y, x%y]
+
+def get_number_from_bitlist(bitlist):
+    bitstring = ''.join(map(lambda x: str(x), bitlist))
+    return int(bitstring, 2)
 
 def get_help_arrays(a, b, q = [], r=[], s=[]):
     max_v = max(a, b)
@@ -87,28 +92,34 @@ def ext_gcd_help(a, b, initial_keys = [], history = dict()):
     if len(initial_keys) == 0:
         initial_keys = [a, b]
 
-    max_v = max(a, b)
-    min_v = min(a, b)
+    max_f = max_polynomial()
+    min_f = min_polynomial()
+
+    max_v = max_f(a, b)
+    min_v = min_f(a, b)
     
+    # change these funs if wanna use gcd for numbers
     division_f = division()
+    get_key_f = get_number_from_bitlist() # for (real) numbers, identity function
+
     d = division_f(max_v, min_v)
     s, remainder = d[0], d[1]
 
     if remainder == 0:
         if min_v in history.keys():
-            return [min_v, history[min_v]]
+            return [min_v, history[get_key_f(min_v)]]
         #print 'a, b, rem', a, b, remainder
-        return [min_v, {max_v: 0, min_v: 1}] # handle case when a mod b == 0 on first call
+        return [min_v, {get_key_f(max_v): 0, get_key_f(min_v): 1}] # handle case when a mod b == 0 on first call
 
     r_temp = dict()
-    r_temp[max_v] = 1
-    r_temp[min_v] = -1 * s
+    r_temp[get_key_f(max_v)] = 1
+    r_temp[get_key_f(min_v)] = -1 * s
     #print 'hist, sent', history, r_temp
     r_temp = update_dict(dict(r_temp), history, initial_keys)
     #print 'hist, received', history, r_temp
 
     #print 'hist before', history
-    history[remainder] = dict(r_temp)
+    history[get_key_f(remainder)] = dict(r_temp)
     #print 'hist after', history
     #print 'UPDATING: ', remainder, r_temp , ' HIST:', history
     return ext_gcd_help(min_v, remainder, initial_keys, history)
