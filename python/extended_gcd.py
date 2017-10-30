@@ -1,5 +1,6 @@
 from polynomial import *
 from copy import deepcopy
+from test import test
 
 def division():
     return lambda x, y: [x/y, x%y]
@@ -68,18 +69,24 @@ def substitute_key(a, key, history):
     return result
 
 def update_dict(a,history, initial_keys): 
-    print '--- UPDATE DICT ---', a, history
+    #print '--- UPDATE DICT ---', a, history
     a_original = dict(a)
     a_sub_keys = list(set(a.keys()) - set(initial_keys))
-    print '\t a_sub_keys: ', a_sub_keys
+    #print '\t a_sub_keys: ', a_sub_keys
     for key in a_sub_keys:
         a = substitute_key(a, key, history)
-        print '\t\t iter_i: ', a
+        #print '\t\t iter_i: ', a
     return a
 
-def gcd(a, b, initial_keys = [], history = dict()):
+def extended_gcd(a, b):
+    return ext_gcd_help(a, b, [], dict())
+
+def ext_gcd_help(a, b, initial_keys = [], history = dict()):
+    if a == 0 or b == 0:
+        raise ValueError('Parameters has to be non-zero')
     if len(initial_keys) == 0:
         initial_keys = [a, b]
+
     max_v = max(a, b)
     min_v = min(a, b)
     
@@ -88,7 +95,10 @@ def gcd(a, b, initial_keys = [], history = dict()):
     s, remainder = d[0], d[1]
 
     if remainder == 0:
-        return [min_v, history[min_v]]
+        if min_v in history.keys():
+            return [min_v, history[min_v]]
+        #print 'a, b, rem', a, b, remainder
+        return [min_v, {max_v: 0, min_v: 1}] # handle case when a mod b == 0 on first call
 
     r_temp = dict()
     r_temp[max_v] = 1
@@ -97,20 +107,19 @@ def gcd(a, b, initial_keys = [], history = dict()):
     r_temp = update_dict(dict(r_temp), history, initial_keys)
     #print 'hist, received', history, r_temp
 
-    print 'hist before', history
+    #print 'hist before', history
     history[remainder] = dict(r_temp)
-    print 'hist after', history
+    #print 'hist after', history
     #print 'UPDATING: ', remainder, r_temp , ' HIST:', history
-    return gcd(min_v, remainder, initial_keys, history)
+    return ext_gcd_help(min_v, remainder, initial_keys, history)
 
-result = gcd(888, 54, history=dict())
-print 'result', result
-result = gcd(1312, 78, history=dict())
-print 'result', result
-#print 'q', result[0]
-#print 'r', result[1]
-#print 's', result[2]
+def test_gcd():
+    test_cases = [  [888, 54, [6, {888:-2, 54:33}]],
+                    [1312, 78, [2, {1312:11, 78:-185}]],
+                    [13, 5, [1, {13:2, 5:-5}]],
+                    [6, 3, [3, {6:0, 3:1}]]
+                 ]
 
-#a = {888:1, 54:-16}
-#b = {54:1, 24:-2}
-#print join_dicts(a, b)
+    test(test_cases, extended_gcd, 'extended_gcd')
+
+test_gcd()

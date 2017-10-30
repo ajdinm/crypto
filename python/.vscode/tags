@@ -15,9 +15,11 @@ PI_1	../pydes.py	/^PI_1 = [40, 8, 48, 16, 56, 24, 64, 32,$/;"	kind:variable	line
 SHIFT	../pydes.py	/^SHIFT = [1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1]$/;"	kind:variable	line:110
 S_BOX	../pydes.py	/^S_BOX = [$/;"	kind:variable	line:42
 __init__	../pydes.py	/^    def __init__(self):$/;"	kind:member	line:144
+_join_dicts	../gcd.py	/^def _join_dicts(a, b, history, initial_keys): $/;"	kind:function	line:46
 _test	../vigenere.py	/^def _test(test_cases, f):$/;"	kind:function	line:20
 addPadding	../pydes.py	/^    def addPadding(self):#Add padding to the datas using PKCS5 spec.$/;"	kind:member	line:229
 add_binary	../polynomial.py	/^def add_binary(a, b):$/;"	kind:function	line:3
+add_dicts	../gcd.py	/^def add_dicts(a, b):$/;"	kind:function	line:37
 add_letters	../vigenere.py	/^def add_letters(p, q):$/;"	kind:function	line:3
 add_padding	../vigenere.py	/^def add_padding(msg, key):$/;"	kind:function	line:37
 add_polynomials_binary	../polynomial.py	/^def add_polynomials_binary(a, b):$/;"	kind:function	line:6
@@ -41,6 +43,7 @@ des	../pydes.py	/^class des():$/;"	kind:class	line:143
 des.py	../des.py	1;"	kind:file	line:1
 des_seq	../des.py	/^def des_seq(msg, key): $/;"	kind:function	line:59
 divide_polynomials	../polynomial.py	/^def divide_polynomials(a, b): # returns (c, d) touple where c = a\/b, and d is reminder in form (numerator, denominator)$/;"	kind:function	line:53
+division	../gcd.py	/^def division():$/;"	kind:function	line:4
 encrypt	../permutation.py	/^def encrypt(msg, key):$/;"	kind:function	line:12
 encrypt	../pydes.py	/^    def encrypt(self, key, text, padding=False):$/;"	kind:member	line:237
 encrypt	../vigenere.py	/^def encrypt(msg, key):$/;"	kind:function	line:44
@@ -51,9 +54,12 @@ expand	../pydes.py	/^    def expand(self, block, table):#Do the exact same thing
 file	../script.py	/^file = open('temp.txt', 'r')$/;"	kind:variable	line:1
 fill_bits	../des.py	/^def fill_bits(target, msg):$/;"	kind:function	line:19
 fill_bits	../polynomial.py	/^def fill_bits(x, n):$/;"	kind:function	line:17
+gcd	../gcd.py	/^def gcd(a, b, initial_keys = [], history = dict()):$/;"	kind:function	line:80
+gcd.py	../gcd.py	1;"	kind:file	line:1
 generatekeys	../pydes.py	/^    def generatekeys(self):#Algorithm that generates all the keys$/;"	kind:member	line:216
 get_P_permutation	../constants.py	/^def get_P_permutation():$/;"	kind:function	line:89
 get_expansion_permutation_array	../constants.py	/^def get_expansion_permutation_array():$/;"	kind:function	line:25
+get_help_arrays	../gcd.py	/^def get_help_arrays(a, b, q = [], r=[], s=[]):$/;"	kind:function	line:7
 get_initital_permutation_array	../constants.py	/^def get_initital_permutation_array():$/;"	kind:function	line:1
 get_inverse_permutation_array	../constants.py	/^def get_inverse_permutation_array():$/;"	kind:function	line:13
 get_letter	../caesar.py	/^def get_letter(number):$/;"	kind:function	line:9
@@ -76,6 +82,7 @@ multiply_degree_polynomial	../polynomial.py	/^def multiply_degree_polynomial(deg
 multiply_polynomials	../polynomial.py	/^def multiply_polynomials(a, b):$/;"	kind:function	line:39
 my_des_cipher	../compare.py	/^my_des_cipher = des_seq(msg,key)$/;"	kind:variable	line:24
 nsplit	../pydes.py	/^def nsplit(s, n):#Split a list into sublists of size "n"$/;"	kind:function	line:134
+pad_keys	../gcd.py	/^def pad_keys(d, keys):$/;"	kind:function	line:30
 permut	../pydes.py	/^    def permut(self, block, table):#Permut the given block using the given table (so generic method)$/;"	kind:member	line:207
 permutation	../des.py	/^def permutation(key, msg):$/;"	kind:function	line:7
 permutation	../permutation.py	/^def permutation(perm_array, msg):$/;"	kind:function	line:4
@@ -86,6 +93,8 @@ print_array	../compare.py	/^def print_array(array):$/;"	kind:function	line:5
 print_array	../pydes.py	/^def print_array(array, text = ''):$/;"	kind:function	line:137
 pydes.py	../pydes.py	1;"	kind:file	line:1
 removePadding	../pydes.py	/^    def removePadding(self, data):#Remove the padding of the plain text (it assume there is padding)$/;"	kind:member	line:233
+result	../gcd.py	/^result = gcd(1312, 78, history=dict())$/;"	kind:variable	line:108
+result	../gcd.py	/^result = gcd(888, 54, history=dict())$/;"	kind:variable	line:106
 rotate	../caesar.py	/^rotate = shift_dist.index(min(shift_dist))$/;"	kind:variable	line:66
 run	../pydes.py	/^    def run(self, key, text, action=ENCRYPT, padding=False):$/;"	kind:member	line:155
 s_box	../des.py	/^def s_box(key, msg):$/;"	kind:function	line:42
@@ -97,6 +106,7 @@ shift_text	../caesar.py	/^def shift_text(text, shift):$/;"	kind:function	line:38
 split_array	../des.py	/^def split_array(array, items_in_split):$/;"	kind:function	line:50
 string_to_bit_array	../pydes.py	/^def string_to_bit_array(text):#Convert a string into a list of bits$/;"	kind:function	line:115
 substitute	../pydes.py	/^    def substitute(self, d_e):#Substitute bytes using SBOX$/;"	kind:member	line:195
+substitute_key	../gcd.py	/^def substitute_key(a, key, history):$/;"	kind:function	line:58
 substract_letters	../vigenere.py	/^def substract_letters(p, q):$/;"	kind:function	line:10
 test	../test.py	/^def test(test_cases, f, f_name, ok_msg = 'OK', nok_msg = 'NOK', print_ok_case = False, print_nok_case = True):$/;"	kind:function	line:3
 test.py	../test.py	1;"	kind:file	line:1
@@ -121,6 +131,7 @@ text	../script.py	/^text = file.read()$/;"	kind:variable	line:2
 text	../script.py	/^text = text.replace(' ', '').split('\\n')[:-1]$/;"	kind:variable	line:5
 text_prob	../caesar.py	/^text_prob = get_letter_probs(test_text)$/;"	kind:variable	line:64
 total_variation_distance	../caesar.py	/^def total_variation_distance(X, Y):$/;"	kind:function	line:3
+update_dict	../gcd.py	/^def update_dict(a,history, initial_keys): $/;"	kind:function	line:70
 vigenere.py	../vigenere.py	1;"	kind:file	line:1
 xor	../pydes.py	/^    def xor(self, t1, t2):#Apply a xor and return the resulting list$/;"	kind:member	line:213
 xor_bitstrings	../des.py	/^def xor_bitstrings(a, b):$/;"	kind:function	line:55
