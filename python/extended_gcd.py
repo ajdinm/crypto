@@ -2,8 +2,8 @@ from polynomial import *
 from copy import deepcopy
 from test import test
 
-def division():
-    return divide_polynomials()
+def division(x, y):
+    return divide_polynomials(x, y)
     return lambda x, y: [x/y, x%y]
 
 def get_number_from_bitlist(bitlist):
@@ -94,27 +94,29 @@ def ext_gcd_help(a, b, initial_keys = [], history = dict()):
 
     # change these funs if want to use gcd for numbers
     
-    max_f = max_polynomial()
-    min_f = min_polynomial()
-    division_f = division()
-    get_key_f = get_number_from_bitlist() # for (real) numbers, identity function
+    max_f = max_polynomial
+    min_f = min_polynomial
+    division_f = division
+    get_key_f = get_number_from_bitlist # for (real) numbers, identity function
 
     max_v = max_f(a, b)
     min_v = min_f(a, b)
 
     d = division_f(max_v, min_v)
     s, remainder = d[0], d[1]
+    remainder = remainder[0] + remainder[1] # since polynomial remainder is in form  x/y
+    if s == []:
+        s = 0
 
     if sum(remainder) == 0:
         if min_v in history.keys():
             return [min_v, history[get_key_f(min_v)]]
         #print 'a, b, rem', a, b, remainder
-        return [min_v, {get_key_f(max_v): 0, get_key_f(min_v): 1}] # handle case when a mod b == 0 on first call
-
+        return [min_v, {get_key_f(max_v): 0, get_key_f(min_v): 1}] # handle case when a mod b == 0 on the first call
     r_temp = dict()
     r_temp[get_key_f(max_v)] = 1
-    r_temp[get_key_f(min_v)] = -1 * s
-    #print 'hist, sent', history, r_temp
+    r_temp[get_key_f(min_v)] = s # adding and substracting binary polynomials is the same
+    print 'hist, sent', history, r_temp
     r_temp = update_dict(dict(r_temp), history, initial_keys)
     #print 'hist, received', history, r_temp
 
@@ -133,4 +135,6 @@ def test_gcd():
 
     test(test_cases, extended_gcd, 'extended_gcd')
 
-test_gcd()
+a = [1, 0, 1, 0, 1]
+b = [0, 1]
+print extended_gcd(a, b)
